@@ -48,7 +48,7 @@ function Input(){
       .catch(err=>{console.log(`fetch err =>`);});
     }
   }
-  return (<>
+  return (<div className='maindDiv'>
     <div className="input">
         <input 
         type="text" 
@@ -66,7 +66,7 @@ function Input(){
     <div>
         
     </div>
-    </>
+    </div>
   )
 }
 
