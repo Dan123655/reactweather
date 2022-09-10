@@ -4,73 +4,67 @@
   box-sizing: border-box;
   justify-content: center;
 } */
-.App{
+.App {
   margin-top: 10%;
   background-color: rgb(99, 181, 248);
   border-style: inset;
   border-width: 1px;
-  min-width: fit-content;
   margin-left: auto;
   margin-right: auto;
   border-radius: 10px;
   min-height: 500px;
-  min-width: 650px;
-  box-shadow: #131111 5px, 5px,5px,5px;
+  min-width: 500px;
+  width: 650px;
+
+  box-shadow: #131111 5px, 5px, 5px, 5px;
 }
 
-
-.input{
+.input {
   text-align: center;
   margin-left: 10px;
   margin-top: 20px;
   margin-right: 10px;
-
 }
 input:focus {
-  outline:none;
-
+  outline: none;
 }
-input[type='text']{
-  padding-top: 5px; padding-bottom: 5px;
-  padding-right: 10px;padding-left: 10px;
-  
+input[type="text"] {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 10px;
+  padding-left: 10px;
+
   height: 30px;
   width: 240px;
   background: rgba(243, 243, 243, 0.822);
-  font-family: 'Helvetica', sans-serif;
+  font-family: "Helvetica", sans-serif;
   font-size: 14px;
   border: none;
   border-radius: 8px;
-
 }
-.location{
+.location {
   margin-top: 120px;
   margin-left: auto;
   margin-right: auto;
   color: #000000;
   font-weight: 700;
   font-size: 50px;
-  font-family: 'helvetica', sans-serif;
-
-
+  font-family: "helvetica", sans-serif;
 }
-.description{
+.description {
   margin-top: 10px;
   margin-left: auto;
   margin-right: auto;
   color: #8b8b8b;
   font-weight: 200;
   font-size: 20px;
-  font-family: 'helvetica', sans-serif;
-
-
+  font-family: "helvetica", sans-serif;
 }
 
-
-.temp{
+.temp {
   margin-top: 20px;
   font-size: 500%;
   font-weight: lighter;
-  font-family: 'Helvetica', sans-serif;
+  font-family: "Helvetica", sans-serif;
 }
 /* body{background-color:#fffdfb} */
