@@ -1,29 +1,18 @@
-/* *{
-  margin: 0;
-  padding: 0;
+
+*{
   box-sizing: border-box;
-  justify-content: center;
-} */
-.App {
-  margin-top: 10%;
-  background-color: rgb(99, 181, 248);
-  border-style: inset;
-  border-width: 1px;
-  margin-left: auto;
-  margin-right: auto;
-  border-radius: 10px;
-  min-height: 500px;
-  min-width: 500px;
-  width: 650px;
-
-  box-shadow: #131111 5px, 5px, 5px, 5px;
+  padding: 0;
+  margin: 0;
 }
-
-.input {
-  text-align: center;
-  margin-left: 10px;
-  margin-top: 20px;
-  margin-right: 10px;
+body{
+  font-family: 'Open sans', sans-serif;
+  line-height: 1.5;
+  background: #f5f5f5;
+}
+.inputValue {
+  margin: auto;
+  justify-self: center;
+  
 }
 input:focus {
   outline: none;
@@ -34,37 +23,71 @@ input[type="text"] {
   padding-right: 10px;
   padding-left: 10px;
 
-  height: 30px;
-  width: 240px;
+ 
   background: rgba(243, 243, 243, 0.822);
-  font-family: "Helvetica", sans-serif;
+  font-family: "Open sans", sans-serif;
   font-size: 14px;
   border: none;
-  border-radius: 8px;
-}
-.location {
-  margin-top: 120px;
-  margin-left: auto;
-  margin-right: auto;
-  color: #000000;
-  font-weight: 700;
-  font-size: 50px;
-  font-family: "helvetica", sans-serif;
-}
-.description {
-  margin-top: 10px;
-  margin-left: auto;
-  margin-right: auto;
-  color: #8b8b8b;
-  font-weight: 200;
-  font-size: 20px;
-  font-family: "helvetica", sans-serif;
-}
+  border-radius: 8px;}
+  
 
-.temp {
-  margin-top: 20px;
-  font-size: 500%;
-  font-weight: lighter;
-  font-family: "Helvetica", sans-serif;
-}
-/* body{background-color:#fffdfb} */
+  @media (min-width:960px){
+    .grid-container{
+      border: black 1px solid;
+      display: grid;
+      height: 100vh;
+      grid-template-areas: 
+      'input input input input'
+      'city city city city'
+      'temp temp condition condition'
+      'precip feel wind pressure';
+    }
+    .city, 
+    .condition, 
+    .temp, 
+    .wind, 
+    .precip, 
+    .feel, 
+    .pressure{
+      border: black 1px solid;
+      padding: 1rem;
+      text-align: center;
+      font-size: 2rem;
+    }
+    .city{grid-area: city;} 
+    .condition{grid-area: condition;} 
+    .temp{grid-area: temp;}
+    .wind{grid-area: wind;}
+    .precip{grid-area: precip;}
+    .feel{grid-area: feel;}
+    .pressure{grid-area: pressure;}
+    
+  }
+  
+
+
+  .temp{grid-column: 2/3 ;}
+  .condition{grid-column: 4/3;}
+  @media(max-width: 960px){
+    .grid-container{
+      
+        border: black 1px solid;
+        /* display: grid; */
+        height: 100vh;
+      /* grid-template-columns:1fr; */
+    }
+    
+    .city, 
+    .condition, 
+    .temp, 
+    .wind, 
+    .precip, 
+    .feel, 
+    .pressure{
+      border: black 1px solid;
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 1rem;
+      height: 12%;
+    }
+  }
