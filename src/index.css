@@ -8,7 +8,9 @@
 body{
   font-family: 'Open sans', sans-serif;
   line-height: 1.1;
-  background: #f5f5f5;
+  background: #9dc6fc;
+  color: white;
+  
 }
 .inputValue {
   margin: auto;
@@ -27,9 +29,9 @@ input[type="text"] {
   padding-bottom: 5px;
   padding-right: 10px;
   padding-left: 10px;
-
+  color: azure;
  
-  background: rgba(209, 207, 207, 0);
+  background: rgba(16, 45, 68, 0.342);
   font-family: "Open sans", sans-serif;
   font-size: 14px;
   border: none;
@@ -37,10 +39,12 @@ input[type="text"] {
   input{width: 100%;}
   @media (min-width:700px){
     .grid-container{
-      margin: 100px auto 100px auto;
+      margin: 200px auto 100px auto;
       max-height: 70%;
       max-width: 800px;
-      border: black 1px solid;
+      /* border: black 1px solid; */
+      box-shadow: black 0px 0px 15px -4px;
+      border-radius: 10px;
       display: grid;
       /* height: 100vh; */
       grid-template-areas: 
@@ -60,12 +64,11 @@ input[type="text"] {
     .pressure{
       display: flex;
       justify-content: center;
-      border: black 1px solid;
+      /* border: black 1px solid; */
       text-align: center;
       align-items: center;
       /* padding: 1rem; */
-
-      font-size: 1.2rem;
+      font-size: 1rem;
     }
     .input{grid-area: input;}
     .city{grid-area: city;
@@ -81,13 +84,15 @@ input[type="text"] {
   }
   
 
-
+  .temp,
+  .city{font-size: 4rem;}
   .temp{grid-column: 2/3 ;}
   .condition{grid-column: 4/3;}
   @media(max-width: 700px){
     .grid-container{
+      margin-top: 0%;
       min-height: 500px;
-        border: black 1px solid;
+        /* border: black 1px solid; */
         /* display: grid; */
         height: 100vh;
       /* grid-template-columns:1fr; */
@@ -103,11 +108,42 @@ input[type="text"] {
     .pressure{
       display: flex;
       justify-content: center;
-      border: black 1px solid;
+      /* border: black 1px solid; */
       text-align: center;
       align-items: center;
-      font-size: 2rem;
-      height: 12%;
+      font-size: 1.6rem;
+      /* height: 12%; */
+      min-height: 3.5rem;
   }
+  .input{margin-bottom: 5rem;}
+  .temp{font-size: 8rem;}
+.city{font-size: 4rem;}
   }
-  icon{font-size: 4rem;}
+  .weatherIcon{font-size: 4rem;
+  transform: translateY(0.4rem);
+  margin-right: 1rem;
+  color: rgb(255, 255, 255);
+}
+
+.input{width: 70%;
+margin:auto;
+margin-bottom: 3rem;
+transform: translateY(1.6rem);}
+.grid-container{
+  background: rgb(36, 105, 194);
+}
+.log{
+  font-family: 'Courier New', Courier, monospace;
+  color: black;
+  display:list-item;
+  text-align: left;
+  justify-items: left;
+  justify-content: left;
+  text-align: start;
+
+}
+.log-items{
+  margin-left: 3%;
+text-align: left;
+justify-self: left;}
+.temp{color:rgb(110, 226, 110);font-weight:700;}
