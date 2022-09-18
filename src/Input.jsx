@@ -5,69 +5,79 @@ import{BsCloudLightningRain, BsCloudRain, BsMoonStars} from 'react-icons/bs';
 import{AiOutlineCloud} from 'react-icons/ai';
 import{WiFog,WiNightAltRainMix,WiNightAltCloudy} from 'react-icons/wi';
 import{MdOutlineWbSunny} from 'react-icons/md';
+import { useEffect } from "react";
 
 
 
 
 
-
-const debounce = (func) => {
-  let timer;
-  return function (...args) {
-    const context = this;
-    if (timer) clearTimeout(timer);
-    timer = setTimeout(() => {
-      timer = null;
-      func.apply(context, args);
-    }, 1000);
-  };
-};
 
 function Input() {
-  
-  const [city, setCity] = useState("");
-  const [temp, setTemp] = useState("");
-  const [weatherCond, setWeatherCond] = useState("");
-  const [precip_mm, setPrecip_mm] = useState("");
+const [log,setLog] = useState(['>page loaded'])
+
+  const debounce = (func) => {
+    let timer;
+    return function (...args) {
+      const context = this;
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        timer = null;
+        func.apply(context, args);
+      }, 1000);
+    };
+
+  };
+ 
+  const [city, setCity] = useState("Hello");
+  const [temp, setTemp] = useState("20°C");
+  const [weatherCond, setWeatherCond] = useState("Cloudy");
+  const [precip_mm, setPrecip_mm] = useState("0.26");
   const [precip_in, setPrecip_in] = useState("");
   const [cache, cacheThis] = useState([]);
-  const [windKm, setWindKm] = useState("")
+  const [windKm, setWindKm] = useState("9.2")
   const [windM, setWindM] = useState("")
-  const [feel, setFeel] = useState("")
+  const [feel, setFeel] = useState("21")
   const [feelF, setFeelF] = useState("")
-  const [pressure, setPressure] = useState("")
+  const [pressure, setPressure] = useState("1003")
   const [pressureIn, setPressureIn] = useState("")
-  const [day, setDay] = useState("")
-  
+  const [day, setDay] = useState(true)
+
   const properIcon =()=>{
-  
-    if(day&&weatherCond.toLowerCase().includes('rain')) {return (<BsCloudRain></BsCloudRain>) } 
-  else if(!day&&weatherCond.toLowerCase().includes('rain')){return (<WiNightAltRainMix></WiNightAltRainMix>)}
-  else if(!day&&weatherCond.toLowerCase().includes('sunny')){return(<BsMoonStars></BsMoonStars>)}
-  else if(!day&&weatherCond.toLowerCase().includes('clear')){return(<BsMoonStars></BsMoonStars>)}
-
-  else if(!day&&weatherCond.toLowerCase().includes('cloud')){return(<WiNightAltCloudy></WiNightAltCloudy>)}
-  else if(!day&&weatherCond.toLowerCase().includes('mist')){return(<WiNightAltCloudy></WiNightAltCloudy>)}
-  else if(!day&&weatherCond.toLowerCase().includes('fog')){return(<WiNightAltCloudy></WiNightAltCloudy>)}
-  else if(!day&&weatherCond.toLowerCase().includes('overcast')){return(<WiNightAltCloudy></WiNightAltCloudy>)}
-  
-
-  else if(day&&weatherCond.toLowerCase().includes('cloud')){return(<AiOutlineCloud></AiOutlineCloud>)}
-  else if(day&&weatherCond.toLowerCase().includes('mist')){return(<AiOutlineCloud></AiOutlineCloud>)}
-  else if(day&&weatherCond.toLowerCase().includes('fog')){return(<AiOutlineCloud></AiOutlineCloud>)}
-  else if(day&&weatherCond.toLowerCase().includes('overcast')){return(<AiOutlineCloud></AiOutlineCloud>)}
-  
-  else if(day&&weatherCond.toLowerCase().includes('sunny')){return(<MdOutlineWbSunny></MdOutlineWbSunny>)}
-  else if(day&&weatherCond.toLowerCase().includes('clear')){return(<MdOutlineWbSunny></MdOutlineWbSunny>)}
-  else{return}
+ const wtlc = weatherCond.toLowerCase();
+    if(day&&wtlc.includes('rain')) {return (<div className="weatherIcon">
+      <BsCloudRain></BsCloudRain>
+    </div>) } 
+      else if(!day&&(wtlc.includes('rain')||wtlc.includes('sun'))){return (<div className="weatherIcon">
+        <WiNightAltRainMix></WiNightAltRainMix>
+      </div>)}
+        else if(!day&&(wtlc.includes('mist')||wtlc.includes('cloud'))){return(<div className="weatherIcon">
+          <WiNightAltCloudy></WiNightAltCloudy>
+        </div>)}
+          else if(!day&&(wtlc.includes('fog')||wtlc.includes('overcast'))){return(<div className="weatherIcon">
+            <WiNightAltCloudy></WiNightAltCloudy>
+          </div>)}
+            else if(day&&(wtlc.includes('mist')||wtlc.includes('cloud'))){return(<div className="weatherIcon">
+              <AiOutlineCloud></AiOutlineCloud>
+            </div>)}
+              else if(day&&(wtlc.includes('fog')||wtlc.includes('overcast'))){return(<div className="weatherIcon">
+                <AiOutlineCloud></AiOutlineCloud>
+              </div>)}
+                else if(day&&(wtlc.includes('sun')||wtlc.includes('clear'))){return(<div className="weatherIcon">
+                  <MdOutlineWbSunny></MdOutlineWbSunny>
+                </div>)}
+                  else if(!day&&wtlc.includes('clear')){return(<div className="weatherIcon">
+                    <BsMoonStars></BsMoonStars>
+                  </div>)}
+                    else{return}
          
   }
 
 
 
-  if (cache.length > 3) {
+  if (cache.length > 2) {
     cache.shift();
     console.log("cache is full, removing oldest item");
+    setLog([...log, ">cache is full",">oldest item removed"])
   }
 
   const memeTime = useMemo(()=>{
@@ -96,7 +106,9 @@ function Input() {
         setPrecip_mm("*" + cache[c_obj].c_precip_mm)
         setPrecip_in("*" + cache[c_obj].c_precip_in)
         setDay("*" + cache[c_obj].c_is_day)
-        console.log("showing cached " + value + ", no API call needed");
+      
+        
+        setLog([...log, ">showing *cached "+value+ " no API call needed"]);
       } else if (value === "") {
         setCity("");
         setTemp("");
@@ -112,6 +124,9 @@ function Input() {
         setDay("")
       } else {
         console.log("after 1 sec, got value, fetching...");
+        
+        setLog([...log,">got value, after 1 sec - fetching data",">cached"])
+        
         var apiKey = "fb85ebfe704544bf97a23953221907";
         await fetch(
           `https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${value}&aqi=no`
@@ -153,27 +168,31 @@ function Input() {
             console.log(data.location.name + " " + data.current.temp_c + "°C");
             
             console.log("cached: " + (parseInt(cache.length) + 1));
+            // setLog([...log,">cached new data"])
           })
   
           .catch((err) => {
             console.log(`fetch err =>`);
+            setLog([...log,">fetch error, try again"])
           });
       }
     }
-    console.log(cache)
+   
     return debounce(getData)
-  },[cache]);
+  },[cache,log]);
 
 
 
 
-  return (
+  return (<>
     <div className="grid-container">
       <div className="input">
         <input
           type="text"
           className="inputValue"
-          placeholder="Enter a city"
+          onClick={()=>setLog([...log,">input use",">awaiting value..."])}
+          
+          placeholder={cache.length===0?"Enter a city":"Try another city"}
           onChange={memeTime}
         />
       </div>
@@ -184,8 +203,18 @@ function Input() {
         <div className="precip">{precip_mm?"precip: " + precip_mm:""}</div>
         <div className="feel">{feel?"feels like " +feel+"C":""}</div>
         <div className="pressure">{pressure?"AP: "+pressure+" mb":""}</div>
-      <div></div>
+      
     </div>
+    {/* <div className="log">
+      
+     {
+      
+ 
+    
+    log.map((item,i)=>{return(<p className="log-items" key={i}>{item}</p>)})}</div> */}
+    
+    
+    </>
   );
 }
 
