@@ -5,7 +5,6 @@ import{BsCloudLightningRain, BsCloudRain, BsMoonStars} from 'react-icons/bs';
 import{AiOutlineCloud} from 'react-icons/ai';
 import{WiFog,WiNightAltRainMix,WiNightAltCloudy} from 'react-icons/wi';
 import{MdOutlineWbSunny} from 'react-icons/md';
-import { useEffect } from "react";
 
 
 
@@ -13,7 +12,6 @@ import { useEffect } from "react";
 
 
 function Input() {
-const [log,setLog] = useState(['>page loaded'])
 
   const debounce = (func) => {
     let timer;
@@ -74,10 +72,9 @@ const [log,setLog] = useState(['>page loaded'])
 
 
 
-  if (cache.length > 2) {
+  if (cache.length > 69) {
     cache.shift();
-    console.log("cache is full, removing oldest item");
-    setLog([...log, ">cache is full",">oldest item removed"])
+
   }
 
   const memeTime = useMemo(()=>{
@@ -108,7 +105,6 @@ const [log,setLog] = useState(['>page loaded'])
         setDay("*" + cache[c_obj].c_is_day)
       
         
-        setLog([...log, ">showing *cached "+value+ " no API call needed"]);
       } else if (value === "") {
         setCity("");
         setTemp("");
@@ -123,9 +119,7 @@ const [log,setLog] = useState(['>page loaded'])
         setPressureIn("")
         setDay("")
       } else {
-        console.log("after 1 sec, got value, fetching...");
         
-        setLog([...log,">got value, after 1 sec - fetching data",">cached"])
         
         var apiKey = "fb85ebfe704544bf97a23953221907";
         await fetch(
@@ -165,21 +159,17 @@ const [log,setLog] = useState(['>page loaded'])
                 c_is_day: data.current.is_day===0?false:true
               }
             ]);
-            console.log(data.location.name + " " + data.current.temp_c + "°C");
             
-            console.log("cached: " + (parseInt(cache.length) + 1));
-            // setLog([...log,">cached new data"])
           })
   
           .catch((err) => {
-            console.log(`fetch err =>`);
-            setLog([...log,">fetch error, try again"])
+            console.log(`fetch err, try again`);
           });
       }
     }
    
     return debounce(getData)
-  },[cache,log]);
+  },[cache]);
 
 
 
@@ -190,7 +180,6 @@ const [log,setLog] = useState(['>page loaded'])
         <input
           type="text"
           className="inputValue"
-          onClick={()=>setLog([...log,">input use",">awaiting value..."])}
           
           placeholder={cache.length===0?"Enter a city":"Try another city"}
           onChange={memeTime}
@@ -205,13 +194,7 @@ const [log,setLog] = useState(['>page loaded'])
         <div className="pressure">{pressure?"AP: "+pressure+" mb":""}</div>
       
     </div>
-    {/* <div className="log">
-      
-     {
-      
- 
-    
-    log.map((item,i)=>{return(<p className="log-items" key={i}>{item}</p>)})}</div> */}
+
     
     
     </>
